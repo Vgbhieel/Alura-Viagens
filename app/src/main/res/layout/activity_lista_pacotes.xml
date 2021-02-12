@@ -7,7 +7,7 @@
     tools:context=".ui.activity.ListaPacotesActivity">
 
     <View
-        android:id="@+id/v_purple"
+        android:id="@+id/lista_pacotes_v_purple"
         android:layout_width="0dp"
         android:layout_height="120dp"
         android:background="@android:color/holo_purple"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_especiais"
+        android:id="@+id/lista_pacotes_tv_especiais"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_brasil"
+        android:id="@+id/lista_pacotes_tv_brasil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -36,16 +36,17 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/tv_especiais"
-        app:layout_constraintTop_toBottomOf="@+id/tv_especiais" />
+        app:layout_constraintStart_toStartOf="@+id/lista_pacotes_tv_especiais"
+        app:layout_constraintTop_toBottomOf="@+id/lista_pacotes_tv_especiais" />
 
     <ListView
-        android:id="@+id/lv_itens"
+        android:id="@+id/lista_pacotes_lv_itens"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/v_purple" />
+        app:layout_constraintTop_toBottomOf="@id/lista_pacotes_v_purple"
+        tools:listitem="@layout/item_pacote" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

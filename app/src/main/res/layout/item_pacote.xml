@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="@id/item_pacote_iv_cidade" />
 
     <View
-        android:id="@+id/item_pacote_div"
+        android:id="@+id/item_pacote_v_divisor"
         android:layout_width="0dp"
         android:layout_height="3dp"
         android:background="@android:color/holo_orange_dark"
@@ -46,7 +46,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/item_pacote_div" />
+        app:layout_constraintTop_toTopOf="@id/item_pacote_v_divisor" />
 
     <TextView
         android:id="@+id/item_pacote_tv_preco"
