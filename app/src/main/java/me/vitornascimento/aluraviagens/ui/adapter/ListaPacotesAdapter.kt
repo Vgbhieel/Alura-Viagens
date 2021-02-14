@@ -9,8 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import me.vitornascimento.aluraviagens.R
 import me.vitornascimento.aluraviagens.model.Pacote
-import java.text.DecimalFormat
-import java.util.*
+import me.vitornascimento.aluraviagens.util.DiasUtil
+import me.vitornascimento.aluraviagens.util.MoedaUtil
 
 class ListaPacotesAdapter(val context: Context, val pacotes: List<Pacote>) : BaseAdapter() {
 
@@ -47,9 +47,8 @@ class ListaPacotesAdapter(val context: Context, val pacotes: List<Pacote>) : Bas
         pacote: Pacote
     ) {
         val tvPreco: TextView = view.findViewById(R.id.item_pacote_tv_preco)
-        val formatoBrasileiro = DecimalFormat
-            .getCurrencyInstance(Locale("pt", "br"))
-        tvPreco.text = formatoBrasileiro.format(pacote.preco)
+        val formatoBrasileiro = MoedaUtil.formataParaBrasilero(pacote.preco)
+        tvPreco.text = formatoBrasileiro
     }
 
     private fun configuraTvDias(
@@ -57,15 +56,8 @@ class ListaPacotesAdapter(val context: Context, val pacotes: List<Pacote>) : Bas
         pacote: Pacote
     ) {
         val tvDias: TextView = view.findViewById(R.id.item_pacote_tv_dias)
-        val qtdDias = pacote.dias
-        val diasToString: String
-        if (qtdDias > 1) {
-            diasToString = qtdDias.toString() + " dias"
-            tvDias.text = diasToString
-        } else {
-            diasToString = qtdDias.toString() + " dia"
-            tvDias.text = diasToString
-        }
+        val diasToString = DiasUtil.formataDias(pacote.dias)
+        tvDias.text = diasToString
     }
 
     private fun configuraIvLocal(
