@@ -29,22 +29,33 @@ class ListaPacotesAdapter(val context: Context, val pacotes: List<Pacote>) : Bas
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view = LayoutInflater.from(context).inflate(R.layout.item_pacote, parent, false)
-
         val pacote = pacotes[position]
 
-        val tvLocal: TextView = view.findViewById(R.id.item_pacote_tv_cidade)
-        tvLocal.text = pacote.local
+        configuraTvLocal(view, pacote)
 
-        val ivCidade: ImageView = view.findViewById(R.id.item_pacote_iv_cidade)
-        val resources = context.resources
-        ivCidade.setImageResource(
-            resources.getIdentifier(
-                pacote.imagem,
-                "drawable",
-                context.packageName
-            )
-        )
+        configuraIvLocal(view, pacote)
 
+        configuraTvDias(view, pacote)
+
+        configuraTvPreco(view, pacote)
+
+        return view
+    }
+
+    private fun configuraTvPreco(
+        view: View,
+        pacote: Pacote
+    ) {
+        val tvPreco: TextView = view.findViewById(R.id.item_pacote_tv_preco)
+        val formatoBrasileiro = DecimalFormat
+            .getCurrencyInstance(Locale("pt", "br"))
+        tvPreco.text = formatoBrasileiro.format(pacote.preco)
+    }
+
+    private fun configuraTvDias(
+        view: View,
+        pacote: Pacote
+    ) {
         val tvDias: TextView = view.findViewById(R.id.item_pacote_tv_dias)
         val qtdDias = pacote.dias
         val diasToString: String
@@ -55,13 +66,29 @@ class ListaPacotesAdapter(val context: Context, val pacotes: List<Pacote>) : Bas
             diasToString = qtdDias.toString() + " dia"
             tvDias.text = diasToString
         }
+    }
 
-        val tvPreco: TextView = view.findViewById(R.id.item_pacote_tv_preco)
-        val formatoBrasileiro = DecimalFormat
-            .getCurrencyInstance(Locale("pt", "br"))
-        tvPreco.text = formatoBrasileiro.format(pacote.preco)
+    private fun configuraIvLocal(
+        view: View,
+        pacote: Pacote
+    ) {
+        val ivCidade: ImageView = view.findViewById(R.id.item_pacote_iv_cidade)
+        val resources = context.resources
+        ivCidade.setImageResource(
+            resources.getIdentifier(
+                pacote.imagem,
+                "drawable",
+                context.packageName
+            )
+        )
+    }
 
-        return view
+    private fun configuraTvLocal(
+        view: View,
+        pacote: Pacote
+    ) {
+        val tvLocal: TextView = view.findViewById(R.id.item_pacote_tv_cidade)
+        tvLocal.text = pacote.local
     }
 
 }
