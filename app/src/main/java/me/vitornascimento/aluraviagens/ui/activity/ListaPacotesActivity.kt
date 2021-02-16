@@ -1,5 +1,6 @@
 package me.vitornascimento.aluraviagens.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import me.vitornascimento.aluraviagens.dao.PacoteDAO
@@ -20,6 +21,8 @@ class ListaPacotesActivity : AppCompatActivity() {
         title = TITULO_APPBAR
 
         configuraListView()
+
+        startActivity(Intent(this, ResumoPacoteActivity::class.java))
     }
 
     private fun configuraListView() {
