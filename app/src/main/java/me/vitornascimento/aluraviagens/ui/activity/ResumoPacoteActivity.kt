@@ -1,8 +1,8 @@
 package me.vitornascimento.aluraviagens.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import me.vitornascimento.aluraviagens.dao.PacoteDAO
 import me.vitornascimento.aluraviagens.databinding.ActivityResumoPacoteBinding
 import me.vitornascimento.aluraviagens.model.Pacote
 import me.vitornascimento.aluraviagens.util.DiasUtil
@@ -21,9 +21,7 @@ class ResumoPacoteActivity : AppCompatActivity() {
 
         title = TITULO_APPBAR
 
-        val dao = PacoteDAO()
-        val pacotes = dao.lista()
-        val pacote = pacotes[0]
+        val pacote = intent.getParcelableExtra<Pacote>("pacote") as Pacote
 
         configuraIvCidade(pacote)
 
@@ -35,6 +33,16 @@ class ResumoPacoteActivity : AppCompatActivity() {
 
         configuraTvData(pacote)
 
+        configuraBtnRealizarPagamento(pacote)
+
+    }
+
+    private fun configuraBtnRealizarPagamento(pacote: Pacote) {
+        binding.resumoPacoteBtnRealizarPagamento.setOnClickListener {
+            val vaiParaPagamento = Intent(this, PagamentoActivity::class.java)
+            vaiParaPagamento.putExtra("pacote", pacote)
+            startActivity(vaiParaPagamento)
+        }
     }
 
     private fun configuraTvData(pacote: Pacote) {

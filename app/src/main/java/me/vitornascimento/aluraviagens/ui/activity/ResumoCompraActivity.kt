@@ -2,7 +2,6 @@ package me.vitornascimento.aluraviagens.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import me.vitornascimento.aluraviagens.dao.PacoteDAO
 import me.vitornascimento.aluraviagens.databinding.ActivityResumoCompraBinding
 import me.vitornascimento.aluraviagens.model.Pacote
 import me.vitornascimento.aluraviagens.util.DiasUtil
@@ -21,9 +20,7 @@ class ResumoCompraActivity : AppCompatActivity() {
 
         title = TITULO_APPBAR
 
-        val dao = PacoteDAO()
-        val pacotes = dao.lista()
-        val pacote = pacotes[0]
+        val pacote = intent.getParcelableExtra<Pacote>("pacote") as Pacote
 
         configuraIvCidade(pacote)
 

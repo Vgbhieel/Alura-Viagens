@@ -11,6 +11,7 @@ class ListaPacotesActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityListaPacotesBinding
     val TITULO_APPBAR = "Pacotes"
+    val pacotes = PacoteDAO.lista()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,13 +22,15 @@ class ListaPacotesActivity : AppCompatActivity() {
         title = TITULO_APPBAR
 
         configuraListView()
-
-        startActivity(Intent(this, ResumoCompraActivity::class.java))
     }
 
     private fun configuraListView() {
-        val listView = binding.listaPacotesLvItens
-        val dao = PacoteDAO()
-        listView.adapter = ListaPacotesAdapter(this, dao.lista())
+        binding.listaPacotesLvItens.adapter = ListaPacotesAdapter(this, pacotes)
+
+        binding.listaPacotesLvItens.setOnItemClickListener { _, _, position, _ ->
+            val vaiParaResumoPacote = Intent(this, ResumoPacoteActivity::class.java)
+            vaiParaResumoPacote.putExtra("pacote", pacotes[position])
+            startActivity(vaiParaResumoPacote)
+        }
     }
 }

@@ -1,9 +1,8 @@
 package me.vitornascimento.aluraviagens.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import me.vitornascimento.aluraviagens.R
-import me.vitornascimento.aluraviagens.dao.PacoteDAO
 import me.vitornascimento.aluraviagens.databinding.ActivityPagamentoBinding
 import me.vitornascimento.aluraviagens.model.Pacote
 import me.vitornascimento.aluraviagens.util.MoedaUtil
@@ -21,12 +20,19 @@ class PagamentoActivity : AppCompatActivity() {
 
         title = TITULO_APPBAR
 
-        val dao = PacoteDAO()
-        val pacotes = dao.lista()
-        val pacote = pacotes[0]
+        val pacote = intent.getParcelableExtra<Pacote>("pacote") as Pacote
 
         configuraTvPreco(pacote)
 
+        configuraBtnFinalizarCompra(pacote)
+    }
+
+    private fun configuraBtnFinalizarCompra(pacote: Pacote) {
+        binding.pagamentoBtnFinalizarCompra.setOnClickListener {
+            val vaiParaResumoCompra = Intent(this, ResumoCompraActivity::class.java)
+            vaiParaResumoCompra.putExtra("pacote", pacote)
+            startActivity(vaiParaResumoCompra)
+        }
     }
 
     private fun configuraTvPreco(pacote: Pacote) {
