@@ -22,7 +22,7 @@ class ListaPacotesActivity : AppCompatActivity() {
 
         configuraListView()
 
-        startActivity(Intent(this, PagamentoActivity::class.java))
+        startActivity(Intent(this, ResumoCompraActivity::class.java))
     }
 
     private fun configuraListView() {
